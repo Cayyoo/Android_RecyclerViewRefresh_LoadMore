@@ -13,44 +13,44 @@ SwipeRefreshLayout+RecyclerView实现下拉刷新、上拉加载
 ```
 
 ```java
-    // 下拉刷新
-		mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				mDatas.clear();
-				for (int i = 0; i < 50; i++) {
-					mDatas.add("刷新数据---" + new Random().nextInt(30));
-				}
-				adapter.notifyDataSetChanged();
-				mRefreshLayout.setRefreshing(false);
-			}
-		});
+// 下拉刷新
+mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+	@Override
+	public void onRefresh() {
+		mDatas.clear();
+		for (int i = 0; i < 50; i++) {
+			mDatas.add("刷新数据---" + new Random().nextInt(30));
+		}
+		adapter.notifyDataSetChanged();
+		mRefreshLayout.setRefreshing(false);
+	}
+});
     
-    // 上拉自动加载
-		mRecyclerView.setOnScrollListener(new OnScrollListener() {
-			@Override
-			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-				super.onScrolled(recyclerView, dx, dy);
+// 上拉自动加载
+mRecyclerView.setOnScrollListener(new OnScrollListener() {
+	@Override
+	public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+		super.onScrolled(recyclerView, dx, dy);
 
-				LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-				int last = manager.findLastCompletelyVisibleItemPosition();
-				int totalCount = manager.getItemCount();
+		LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+		int last = manager.findLastCompletelyVisibleItemPosition();
+		int totalCount = manager.getItemCount();
 
-				// last >= totalCount - 2表示剩余2个item是自动加载，可自己设置
-				// dy>0表示向下滑动
-				if (last >= totalCount - 2 && dy > 0) {
-					/*
-					 * 加载数据
-					 */
-					List<String> datas = new ArrayList<>();
-					for (int i = 0; i < 10; i++) {
-						datas.add("加载数据--" + new Random().nextInt(10));
-					}
-					//addData()是在自定义的Adapter中自己添加的方法，用来给list添加数据
-					adapter.addData(datas);
-				}
+		// last >= totalCount - 2表示剩余2个item是自动加载，可自己设置
+		// dy>0表示向下滑动
+		if (last >= totalCount - 2 && dy > 0) {
+			/*
+			 * 加载数据
+			 */
+			List<String> datas = new ArrayList<>();
+			for (int i = 0; i < 10; i++) {
+				datas.add("加载数据--" + new Random().nextInt(10));
 			}
-		});
+			//addData()是在自定义的Adapter中自己添加的方法，用来给list添加数据
+			adapter.addData(datas);
+		}
+	}
+});
 ```
 
 
