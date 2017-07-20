@@ -26,6 +26,8 @@ import java.util.Random;
  * 原始数据未铺满一屏时，即不需要滑动，通过重写RecyclerView的setOnScrollListener无法加载数据
  *
  * 截图左侧的menu在有左键或右键为功能键的Android手机上可调出来
+ *
+ * 注意：刷新完后会有个隐藏和显示刷新布局的操作：mSwriperefresh.setRefreshing(true);true就是展示，false就是隐藏。
  */
 public class MainActivity extends Activity {
 	private RecyclerView mRecyclerView;
